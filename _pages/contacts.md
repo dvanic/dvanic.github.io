@@ -1,6 +1,6 @@
 ---
 layout: page_no_title
-permalink: /contacts
+permalink: /contacts/
 title: contact
 description: Or all the details about how to find me...
 ---

@@ -1,5 +1,5 @@
 ---
-permalink: /publications
+permalink: /publications/
 title: publications
 layout: bib_no_title
 ---
