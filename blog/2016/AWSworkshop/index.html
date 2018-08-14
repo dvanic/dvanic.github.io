@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Darya Vanichkina | Amazon AWS workshop at the University of Sydney</title>
+  <meta name="description" content="Darya Vanichkina's homepage.
+">
+
+  <link rel="shortcut icon" href="/assets/img/favicon.ico">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="canonical" href="/blog/2016/AWSworkshop/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    
+    <span class="site-title">
+        
+        <strong>Darya</strong> Vanichkina
+    </span>
+    
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+      <div class="trigger">
+        <!-- About -->
+        <a class="page-link" href="/">about</a>
+
+        <!-- Blog -->
+        <a class="page-link" href="/blog/">blog</a>
+
+        <!-- Pages -->
+        
+          
+            <a class="page-link" href="/contacts/">contact</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <a class="page-link" href="/publications/">publications</a>
+          
+        
+          
+            <a class="page-link" href="/teaching/">teaching</a>
+          
+        
+          
+        
+          
+        
+
+        <!-- CV link -->
+        <!-- <a class="page-link" href="/assets/pdf/CV.pdf">vitae</a> -->
+
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h3 class="post-title">Amazon AWS workshop at the University of Sydney</h3>
+    <p class="post-meta">November 1, 2016</p>
+  </header>
+
+  <article class="post-content">
+    <p>On October 24th I attented a talk by Adrian White about using Amazon AWS for research. Below are my notes, not extensively annotated, in the hope that they’ll be useful for someone. If something is not clear, please ask in the comments, and I’ll try to answer to the best of my knowledge</p>
+
+<h1 id="161024_aws-workshop">161024_AWS workshop</h1>
+
+<ul>
+  <li>SciTeam ~10 ppl</li>
+</ul>
+
+<h2 id="overview-of-aws-services">Overview of AWS services</h2>
+
+<ul>
+  <li>
+    <p>If you need to make your data available you have availability zones. For an ultra-stable website we can make our app accessible in multiple AZs.</p>
+  </li>
+  <li>
+    <p>Networking - pair with AARNet in Australia</p>
+  </li>
+  <li>
+    <p>spark to run GATK</p>
+  </li>
+  <li>ML module - developed for ecommerce based on how people visit websites</li>
+  <li>supervised learning only, basic linear regression</li>
+</ul>
+
+<h2 id="essential-services">Essential services</h2>
+<h3 id="elastic-compute-ec2">Elastic compute (EC2)</h3>
+<ul>
+  <li>elastic load balance capability interesting for when you’re firing up a shiny analytics environment</li>
+</ul>
+
+<h3 id="networking-services">Networking Services</h3>
+<h4 id="amazon-vpc-virtual-private-cloud">Amazon VPC (virtual private cloud)</h4>
+<ul>
+  <li>own network isolated, within a region, you control addressing, DNS servers, whether it connects to the internet</li>
+</ul>
+
+<h4 id="aws-directconnect">AWS DirectConnect</h4>
+<ul>
+  <li>if you need to transfer data faster</li>
+</ul>
+
+<h4 id="amazon-route-53">Amazon Route 53</h4>
+<ul>
+  <li>Domain Name System (DNS) web service.
+    <h3 id="storage">Storage</h3>
+    <h4 id="amazon-s3">Amazon S3</h4>
+  </li>
+  <li>object storage service (put/get/delete) not a file system (so can’t do byte range retrievals and other subsets of the files)</li>
+  <li>durability with a 10^6 objects you have 1:10k chance of losing it</li>
+  <li>File size - up to 5 Tb.</li>
+</ul>
+
+<h4 id="amazon-ebs">Amazon EBS</h4>
+<ul>
+  <li>up to 16 Tb</li>
+  <li>disk that fires up and is mounted to a server on EC2</li>
+  <li>can still use magnetic disk to cut cost (default is SSD)
+    <h4 id="glacier">Glacier</h4>
+  </li>
+  <li>file size up to 50 Tb</li>
+  <li>cold storage</li>
+  <li>can take 3-5 hours to retrieve object</li>
+  <li>also 11 9s durability
+    <h4 id="aws-storage-gateway">AWS Storage Gateway</h4>
+  </li>
+  <li>storage on premise
+    <h3 id="databases">Databases</h3>
+    <h3 id="amazon-rds">Amazon RDS</h3>
+  </li>
+  <li>Standard relational database. Maintained/run by amazon so you can just use the data
+    <h4 id="amazon-dynamodb">Amazon DynamoDB</h4>
+  </li>
+  <li>Managed NoSQL database service</li>
+  <li>today need 100 reads/sec, tomorrow 1000k</li>
+</ul>
+
+<h4 id="amazon-elasticache">Amazon ElastiCache</h4>
+<ul>
+  <li>reddis</li>
+  <li>some there open source libraries</li>
+</ul>
+
+<h3 id="big-data-services">Big Data Services</h3>
+<ul>
+  <li>Amazon EMR (Elastic Map Reduce)</li>
+  <li>AWS Data Pipeline Hosted Hadoop framework
+    <ul>
+      <li>Move data among AWS services and on premises data sources</li>
+    </ul>
+  </li>
+  <li>Amazon Redshift
+    <ul>
+      <li>Petabyte-scale data warehouse service</li>
+      <li>OLAP style DB environment (massively parallel processing database)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="monitoring-services">Monitoring services</h3>
+<ul>
+  <li>Amazon CloudWatch (free)
+    <ul>
+      <li>Monitor resources</li>
+      <li>you can make your own monitors such as how many times a function is run and send you notifications or make graphs</li>
+    </ul>
+  </li>
+  <li>AWS IAM (Identity &amp; Access Mgmt)
+    <ul>
+      <li>Manage users, groups &amp; permissions</li>
+    </ul>
+  </li>
+  <li>AWS OpsWorks
+    <ul>
+      <li>Dev-Ops framework for application lifecycle management</li>
+    </ul>
+  </li>
+  <li>AWS CloudFormation
+    <ul>
+      <li>Templates to deploy &amp; manage</li>
+      <li>This is useful for us. You build a cluster based on templates = users ,roles, storage, databases, etc</li>
+      <li>infrastructure as a configuration file</li>
+    </ul>
+  </li>
+  <li>AWS Elastic Beanstalk
+    <ul>
+      <li>Automate resource management</li>
+      <li>can host apps with python or java or docker containers (find out more)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="accessing-your-resources">Accessing your resources</h3>
+
+<ul>
+  <li>Everything you can do through the Console, you can do through the CLI or an SDK</li>
+  <li>SDK’s for most programming languages
+    <ul>
+      <li>Andriod, IOS, Java, .Net, Node.js, PHP, Python, Ruby, Go</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="commercial-models">Commercial models</h4>
+
+<ul>
+  <li>on-demand
+    <ul>
+      <li>On-Demand Pay for compute capacity by the hour with no long-term commitments For spiky workloads, or to define needs</li>
+    </ul>
+  </li>
+  <li>spot
+    <ul>
+      <li>Bid for unused capacity, charged at a Spot Price which fluctuates based on supply and demand For time-insensitive or transient workloads</li>
+      <li>60-70% savings on on demand price when it’s on Spot</li>
+      <li>if price goes above that cost, it gets shut down in 2 minutes</li>
+      <li>RNA-seq on spot to have disappearing servers on 250 k samples</li>
+    </ul>
+  </li>
+  <li>Reserved
+    <ul>
+      <li>Make a low, one-time payment and receive a significant discount on the hourly charge. For committed utilization</li>
+    </ul>
+  </li>
+  <li>Dedicated
+ 	- you are the <em>only</em> user on a particular physical piece of hardware
+ 	- health care data compliancy (in the US)</li>
+</ul>
+
+<p>Amazon won’t kill jobs for you itself if your bill goes higher than X. You can configure this yourself, specifying what should happen to storage.</p>
+
+<h3 id="security">Security</h3>
+
+<h3 id="popular-hpc-workloads-on-aws">Popular HPC workloads on AWS</h3>
+<ul>
+  <li>Genome processing</li>
+  <li>Modeling and Simulation</li>
+  <li>Government and Educational Research</li>
+  <li>Monte Carlo Simulations</li>
+  <li>Transcoding and Encoding (video)</li>
+  <li>Computational Chemistry</li>
+</ul>
+
+<h3 id="educate">Educate</h3>
+<ul>
+  <li>aws.amazon.com/training/- self-paced-labs</li>
+  <li>aws.amazon.com/training</li>
+  <li>aws.amazon.com/certification</li>
+</ul>
+
+<p>Can also be used in class:</p>
+
+<ul>
+  <li>AWS blog - best place to get updates on the main stuff that changes</li>
+  <li>Deeper into a topic - product page + documentation</li>
+</ul>
+
+<h1 id="moving-data-to-aws">Moving data to AWS</h1>
+<h3 id="storing-data-in-s3-and-ec2">Storing data in S3 and EC2</h3>
+<p>Amazon S3 is object based storage</p>
+
+<ul>
+  <li>Data is an object (treat each file as a single object)</li>
+  <li>Consists of data (globally unique identifier) and metadata</li>
+  <li>Very simple operations: (not POSIX!)</li>
+  <li>PUT, GET, DELETE, LIST</li>
+  <li>Cannot do an lseek, partial read or write, over-write existing data</li>
+  <li>Versioning is allowed (only differences are stored)</li>
+  <li>You control where data is located (Amazon never moves or copies it)</li>
+  <li>Flat hierarchy (no concept of directories)</li>
+</ul>
+
+<h3 id="amazon-s3-is">Amazon S3 is</h3>
+<ul>
+  <li>Extremely Durable (99.999999999%)</li>
+  <li>Extremely Available (99.99%)</li>
+  <li>Virtually infinite (scalable)</li>
+  <li>Pay only for what you use</li>
+  <li>You control who has access to your data (and the location of the data)</li>
+  <li>Data Encryption
+    <ul>
+      <li>not encrypted by default</li>
+      <li>can tick a box to get amazon to manage encryption</li>
+      <li>can be completely client side encryption only</li>
+    </ul>
+  </li>
+  <li>Event notifications</li>
+  <li>Lifecycle Management</li>
+  <li>Amazon S3 is more read oriented than write oriented</li>
+  <li>However, write performance is still very good</li>
+</ul>
+
+<p>QIMR: Moving data to Europe via snowball - a data store device</p>
+
+<ul>
+  <li>Optimising data transfer to S3</li>
+  <li>Examples</li>
+</ul>
+
+<h3 id="preliminaries">Preliminaries</h3>
+
+<h4 id="before-worrying-about-upload-performance">Before worrying about upload performance:</h4>
+<ol>
+  <li>Know file size distribution and the amount of data
+    <ul>
+      <li>Average file size? Largest? Smallest? Standard Deviation?</li>
+    </ul>
+  </li>
+  <li>Know how you are connected to Internet and AWS
+    <ul>
+      <li>Perform preliminary tests to S3 to understand network performance</li>
+    </ul>
+  </li>
+  <li>Know how you will use data in an Amazon S3 bucket
+    <ul>
+      <li>Will it be shared?</li>
+      <li>How is it organized? How do applications access the data?</li>
+      <li>Read vs. Write?</li>
+      <li>Being able to answer these questions will make things much, much easier (with faster uploads)</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="non-network-keys-to-the-fastest-upload">Non-Network Keys to the fastest upload</h3>
+<ul>
+  <li>The following are general principles for the quickest data
+upload from outside of AWS</li>
+  <li>Multi-part upload
+    <ul>
+      <li>aws s3 create-multipart-upload</li>
+      <li><strong>aws s3 sync # Better command that will try to optimise the performance for you!!!</strong></li>
+      <li>All high-level commands that involve uploading objects into S3 (aws s3 cp, aws s3 mv, and aws s3 sync) automatically perform a multipart upload when the object is large</li>
+    </ul>
+  </li>
+  <li>Parallel upload
+    <ul>
+      <li>each process uses a cpu</li>
+      <li>How you do this is very specific to the language (SDK)</li>
+      <li>In Python use multi-processing module</li>
+      <li>Can use threads (C++, Java)
+        <ul>
+          <li>Some tools already available:</li>
+        </ul>
+      </li>
+      <li>s3-parallel-put (https://github.com/twpayne/s3-parallel-put )</li>
+    </ul>
+  </li>
+  <li>Random prefix to key name
+    <ul>
+      <li>first two characters of filename are part of the key, and should be randomised (evenly) by the alphabet so that they get put onto different partitions and hence the performance is much better</li>
+    </ul>
+  </li>
+  <li>tar
+    <ul>
+      <li>can put everything into a tar archive (such as images), then look at the TOC of the tar and pull out only the byte range of the image you need from AWS</li>
+    </ul>
+  </li>
+  <li>Data compression</li>
+</ul>
+
+<h3 id="examples">Examples</h3>
+
+<h4 id="ska-square-kilometer-array">SKA (square kilometer) array</h4>
+<ul>
+  <li>s3-parallel-upload script (python/boto2)</li>
+  <li>performance dropped off after ~30 parallel processes</li>
+</ul>
+
+<h3 id="hpc">HPC</h3>
+
+<h4 id="cluster-hpc">Cluster HPC</h4>
+<ul>
+  <li>can do placement groups - which means the compute nodes are close to each other physically at the server farm</li>
+  <li>storage is ephemeral, EBS, NFSv4 Amazon EFS or Lustre Intel cloud edition (PAYG), BeeGFS</li>
+  <li>is still redundant within your region (so not as durable as S3)</li>
+  <li>minimum use time on Amazon HPC is 1 hour (so cost is that of 1 hour)</li>
+</ul>
+
+<h4 id="instance-types">Instance types</h4>
+
+<ul>
+  <li>Family - optimised for a particular use
+    <ul>
+      <li>ex R3 - memory</li>
+      <li>ex G2/P2 - GPU</li>
+      <li>ec C3/ CPU use type</li>
+      <li>P2
+        <ul>
+          <li>machine learning genomics (tensor flow)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="data-lakes">Data lakes</h4>
+<ul>
+  <li>store datasets of different types</li>
+</ul>
+
+<h1 id="research-on-aws">Research on AWS</h1>
+
+<h1 id="lab-alces-flight--cfncluster">Lab: Alces Flight &amp; CfnCluster</h1>
+
+<p>Apart from Alces flight, what other launch a cluster configurations are there?</p>
+
+<p>In order to relaunch a snapshot you have you can use CfnCluster.</p>
+
+<p>spark R machine learning</p>
+
+<p>jupiter gnu  (ask him via email)</p>
+
+<h2 id="if-you-need-to-use-a-key-on-windows">If you need to use a key on Windows</h2>
+
+<p><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html">Puttylink</a></p>
+
+
+  </article>
+
+  
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname  = 'dvanic';
+      var disqus_identifier = '/blog/2016/AWSworkshop';
+      var disqus_title      = "Amazon AWS workshop at the University of Sydney";
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer>
+
+  <div class="wrapper">
+    &copy; Copyright 2018 Darya Vanichkina.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
+
+    
+  </div>
+
+</footer>
+
+
+    <!-- Load jQuery -->
+<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+<!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="/assets/js/katex.js"></script>
+
+
+
+
+<!-- Include custom icon fonts -->
+<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/assets/css/academicons.min.css">
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-XXXXXXXXX', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>
