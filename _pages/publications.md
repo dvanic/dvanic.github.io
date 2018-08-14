@@ -1,6 +1,6 @@
 ---
 title: publications
-layout: page_no_title
+layout: page
 css: assets/css/academicons.css
 ---
 
