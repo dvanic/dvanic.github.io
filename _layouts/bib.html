@@ -1,19 +1,6 @@
 ---
 ---
-
-{% if entry.abbr %}
-  {% if site.data.venues[entry.abbr] %}
-    <abbr>[<a href="{{site.data.venues[entry.abbr].url}}" target="_blank">{{entry.abbr}}</a>]</abbr>
-  {% else %}
-    <abbr>[{{entry.abbr}}]</abbr>
-  {% endif %}
-{% endif %}
-
-<div id="{{entry.key}}">
-  {% if entry.type == "thesis" %}
-    {{reference}}
-  {% else %}
-    <span class="title">{{entry.title}}</span>
+   <span class="title">{{entry.title}}</span>
     <span class="author">
       {% for author in entry.author_array %}
         {% unless forloop.last %}
@@ -27,10 +14,10 @@
             {% endif %}
           {% endif %}
         {% else %}
-          and
           {% if author.last == site.scholar.last_name %}
             <em>{{author.last}}, {{author.first}}</em>
           {% else %}
+            and
             {% if site.data.coauthors[author.last] %}
               <a href="{{site.data.coauthors[author.last].url}}" target="_blank">{{author.last}}, {{author.first}}</a>
             {% else %}
@@ -51,39 +38,63 @@
       {{entry.year}}
     {% endif %}
     </span>
+  
+
+
+<!-- {% case {{entry.type}} %}
+{% when 'article' %}
+<span class="label label-success">Journal</span>
+{% when 'conference' %}
+<span class="label label-danger">Conference</span>
+{% when 'phdthesis' %}
+<span class="label label-warning">Ph. D. dissertation</span>
+{% when 'masterthesis' %}
+<span class="label label-warning">Master thesis</span>
+{% else %}
+else
+{% endcase %} -->
+
+<div id="{{key}}-materials" >
+  <ul class="nav nav-pills">
+    {% if entry.file %}
+    <li style="display:inline"><a href="{{entry.file}}"> Download PDF</a></li>
+    {% endif %}
+
+    {% if entry.slides %}
+    <li style="display:inline"><a href="{{entry.slides}}"> Slides</a></li>
+    {% endif %}
+
+    {% if entry.abstract %}
+    <li style="display:inline"><a data-toggle="collapse" href="#{{key}}-abstract">Abstract</a></li>
+    {% endif %}
+
+    {% if entry.youtube %}
+    <li style="display:inline"><a href="{{entry.youtube}}"> Youtube</a></li>
+    {% endif %}
+
+    {% if entry.doi %}
+    <li style="display:inline"><a href="http://doi.org/{{ entry.doi }}" target="_blank"> DOI </a></li>
+    {% endif %}
+
+    {% if entry.poster %}
+    <li style="display:inline"><a href="http://doi.org/{{ entry.doi }}" target="_blank"> Poster </a></li>
+    {% endif %}
+
+    {% if entry.url %}
+    <li style="display:inline"><a href="{{entry.url}}"> URL </a></li>
+    {% endif %}
+
+    {% if entry.pmid %}
+    <li style="display:inline"><a href="http://www.ncbi.nlm.nih.gov/pubmed/{{ entry.pmid }}" target="_blank"> PubMed </a></li>
+    {% endif %}
+
+<!--     <li><a data-toggle="collapse" href="#{{key}}-bibtex">BibTeX</a></li>
+ -->  </ul>
+
+  {% if entry.abstract %}
+  <p id="{{key}}-abstract" class="collapse">{{entry.abstract}}</p>
   {% endif %}
 
-  <span class="links">
-  {% if entry.abstract %}
-    [<a class="abstract">Abs</a>]
-  {% endif %}
-  {% if entry.arxiv %}
-    [<a href="http://arxiv.org/abs/{{ entry.arxiv }}" target="_blank">arXiv</a>]
-  {% endif %}
-  {% if entry.html %}
-    [<a href="{{ entry.html }}" target="_blank">HTML</a>]
-  {% endif %}
-  {% if entry.pdf %}
-    [<a href="{{ entry.pdf | prepend: '/assets/pdf/' | prepend: site.baseurl | prepend: site.url }}" target="_blank">PDF</a>]
-  {% endif %}
-  {% if entry.supp %}
-    [<a href="{{ entry.supp | prepend: '/assets/pdf/' | prepend: site.baseurl | prepend: site.url }}" target="_blank">Supp</a>]
-  {% endif %}
-  {% if entry.poster %}
-    [<a href="{{ entry.poster | prepend: '/assets/pdf/' | prepend: site.baseurl | prepend: site.url }}" target="_blank">Poster</a>]
-  {% endif %}
-  {% if entry.slides %}
-    [<a href="{{ entry.slides | prepend: '/assets/pdf/' | prepend: site.baseurl | prepend: site.url }}" target="_blank">Slides</a>]
-  {% endif %}
-  {% if entry.code %}
-    [<a href="{{ entry.code }}" target="_blank">Code</a>]
-  {% endif %}
-  </span>
+<!--   <pre id="{{key}}-bibtex" class="pre pre-scrollable collapse">{{entry.bibtex}}</pre> -->
 
-  <!-- Hidden abstract block -->
-  {% if entry.abstract %}
-  <span class="abstract hidden">
-    <p>{{ entry.abstract }}</p>
-  </span>
-  {% endif %}
 </div>
