@@ -1,7 +1,6 @@
 ---
 title: publications
 layout: bib_no_title
-css: assets/css/academicons.css
 ---
 
 #### Journal articles
