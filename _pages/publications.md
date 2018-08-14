@@ -1,6 +1,7 @@
 ---
 title: publications
 layout: bib_no_title
+permalink: /publications
 ---
 
 #### Journal articles
